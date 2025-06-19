@@ -35,6 +35,7 @@ client.once(Events.ClientReady, (c: Client) => {
     }
 
     console.log(`Ready! Logged in as ${c.user?.tag}`);
+    console.log(`導入されているサーバー数: ${client.guilds.cache.size}`);
 });
 
 client.on(Events.InteractionCreate, async (interaction: Interaction) => {
