@@ -4,7 +4,8 @@ import {
     GatewayIntentBits,
     Collection,
     Events,
-    DiscordAPIError, VoiceBasedChannel, ButtonStyle
+    DiscordAPIError,
+    VoiceBasedChannel
 } from "discord.js";
 import dotenv = require("dotenv");
 import fs = require("fs");
@@ -14,7 +15,7 @@ import {errorReply, successMoveReply} from "./utils/reply";
 dotenv.config();
 
 const client: any = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildVoiceStates],
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
 });
 
 client.once(Events.ClientReady, (c: Client) => {
@@ -40,35 +41,39 @@ client.once(Events.ClientReady, (c: Client) => {
 
 client.on(Events.InteractionCreate, async (interaction: Interaction) => {
     if (interaction.isButton() && interaction.customId === "moveChannel") {
-        let users: { [p: string]: string } = {};
+        let users: { [mention: string]: string } = {};
 
         for (const embed of interaction.message.embeds) {
             const members = embed.data.description ?? "";
             const channel = embed.data.title ?? "";
             for (const member of members.split(",")) {
-                users[member] = channel;
+                users[member.trim()] = channel;
             }
         }
 
-        const allMembers = await interaction.guild!.members.fetch();
         const allChannels = await interaction.guild!.channels.fetch();
-        const allVoiceChannels = allChannels.filter(c => c?.type == 2);
-        const members = allMembers.filter(m => Object.keys(users).includes(`<@${m.id.toString()}>`));
+        const allVoiceChannels = allChannels.filter(c => c?.type === 2);
 
-        for (const member of members.values()) {
+        for (const mention in users) {
+            const userId = mention.replace(/[<@!>]/g, "");
             try {
-                const channel = allVoiceChannels.filter(c =>
-                    users[`<@${member.id.toString()}>`].includes(<string>c?.name.toString())
-                ).first();
-                await member.voice.setChannel(channel as VoiceBasedChannel);
+                const member = await interaction.guild!.members.fetch(userId);
+                const targetChannel = allVoiceChannels.find(c =>
+                    users[mention].includes(c?.name?.toString() ?? "")
+                );
+                if (targetChannel) {
+                    await member.voice.setChannel(targetChannel as VoiceBasedChannel);
+                }
             } catch (e) {
                 if (!(e instanceof DiscordAPIError && e.code === 40032)) {
                     await errorReply(interaction, e);
                 }
             }
         }
+
         await successMoveReply(interaction);
     }
+
     if (!interaction.isChatInputCommand()) return;
 
     const command = client.commands.get(interaction.commandName);
