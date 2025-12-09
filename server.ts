@@ -1,16 +1,16 @@
 import {
     Client,
-    Interaction,
-    GatewayIntentBits,
     Collection,
-    Events,
     DiscordAPIError,
+    Events,
+    GatewayIntentBits,
+    Interaction,
     VoiceBasedChannel
 } from "discord.js";
-import dotenv = require("dotenv");
-import fs = require("fs");
 import path from "path";
 import {errorReply, successMoveReply} from "./utils/reply";
+import dotenv = require("dotenv");
+import fs = require("fs");
 
 dotenv.config();
 

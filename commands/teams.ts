@@ -13,34 +13,35 @@ import {SlashCommandChannelOption} from "@discordjs/builders";
 
 import {errorChannelReply, errorLackPeopleReply} from "../utils/reply";
 import {shuffle} from "../utils/shuffle";
+import {i18n} from "../utils/i18n";
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("teams")
-        .setDescription("チーム分けをしてボイスチャンネルを移動します。")
+        .setDescription("Divide into teams and move to voice channels.")
         .addChannelOption((option: SlashCommandChannelOption) =>
             option
-                .setName("チーム1")
-                .setDescription("チーム1の移動先チャンネル（例. 一般）")
+                .setName("team1")
+                .setDescription("Destination channel for Team 1 (e.g. General)")
                 .addChannelTypes(2)
                 .setRequired(true)
         ).addChannelOption((option: SlashCommandChannelOption) =>
             option
-                .setName("チーム2")
-                .setDescription("チーム2の移動先チャンネル（例. ロビー）")
+                .setName("team2")
+                .setDescription("Destination channel for Team 2 (e.g. Lobby)")
                 .addChannelTypes(2)
                 .setRequired(true)
         ).addUserOption((option: SlashCommandUserOption) =>
             option
-                .setName("除外メンバー")
-                .setDescription("チーム分けで除外するメンバー")
+                .setName("exclude-member")
+                .setDescription("Member to exclude from team division")
         ),
     async execute(interaction: CommandInteraction) {
         if (!interaction.isChatInputCommand()) return;
         const options = interaction.options;
-        const channel1 = options.getChannel("チーム1") as VoiceBasedChannel;
-        const channel2 = options.getChannel("チーム2") as VoiceBasedChannel;
-        const excludeMember = options.getUser("除外メンバー");
+        const channel1 = options.getChannel("team1") as VoiceBasedChannel;
+        const channel2 = options.getChannel("team2") as VoiceBasedChannel;
+        const excludeMember = options.getUser("exclude-member");
 
         let currentChannel = (interaction.member as any).voice.channel;
         if (currentChannel == null) {
@@ -56,6 +57,7 @@ module.exports = {
 
         const shuffleMembers = shuffle(members.values());
         const half = splitHalf(shuffleMembers);
+        const locale = i18n.getLocale(interaction.locale);
 
         const embed1 = new EmbedBuilder()
             .setColor(0x0099FF)
@@ -71,7 +73,7 @@ module.exports = {
             .addComponents(
                 new ButtonBuilder()
                     .setCustomId("moveChannel")
-                    .setLabel("チャンネルを移動する")
+                    .setLabel(i18n.t("commands.teams.button", locale))
                     .setStyle(ButtonStyle.Primary),
             );
 

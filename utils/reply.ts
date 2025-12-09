@@ -1,53 +1,54 @@
-import {ButtonInteraction, CommandInteraction, VoiceBasedChannel} from "discord.js";
-import {DiscordAPIError} from "discord.js";
+import {ButtonInteraction, CommandInteraction, DiscordAPIError, VoiceBasedChannel} from "discord.js";
+import {i18n} from "./i18n";
 
 export async function successReply(interaction: CommandInteraction, member: any, channel: VoiceBasedChannel) {
-    await interaction.reply(`${[member]} を ${[channel]} チャンネルに移動しました`);
+    const locale = i18n.getLocale(interaction.locale);
+    await interaction.reply(i18n.t("commands.moves.success", locale, {channel: channel.name}));
 }
 
 export async function successChannelReply(interaction: CommandInteraction, channelFrom: VoiceBasedChannel, channelTo: VoiceBasedChannel) {
-    await interaction.reply(`${[channelFrom]} から ${[channelTo]} チャンネルに移動しました`);
+    const locale = i18n.getLocale(interaction.locale);
+    await interaction.reply(i18n.t("commands.channel.success", locale, {from: channelFrom.name, to: channelTo.name}));
 }
 
 export async function successMoveReply(interaction: ButtonInteraction) {
+    const locale = i18n.getLocale(interaction.locale);
     await interaction.reply({
-        content: "ボイスチャンネルを移動しました",
+        content: i18n.t("common.moved", locale),
         ephemeral: true
     });
 }
 
 export async function errorReply(interaction: CommandInteraction | ButtonInteraction, e: any) {
     console.error(e);
-    if (e instanceof DiscordAPIError) {
-        await interaction.reply({
-            content: `エラー (${e.code})： ボイスチャンネルの移動に失敗しました`,
-            ephemeral: true
-        });
-    } else {
-        await interaction.reply({
-            content: "エラー (-1)： ボイスチャンネルの移動に失敗しました",
-            ephemeral: true
-        });
-    }
+    const locale = i18n.getLocale(interaction.locale);
+    const errorMsg = e instanceof DiscordAPIError ? `${e.code}` : "-1";
+    await interaction.reply({
+        content: i18n.t("common.error", locale, {error: errorMsg}),
+        ephemeral: true
+    });
 }
 
 export async function errorConnectReply(interaction: CommandInteraction) {
+    const locale = i18n.getLocale(interaction.locale);
     await interaction.reply({
-        content: "エラー (40032)： 対象ユーザーがボイスチャンネルに接続されていません",
+        content: i18n.t("commands.moves.error", locale),
         ephemeral: true
     });
 }
 
 export async function errorChannelReply(interaction: CommandInteraction | ButtonInteraction) {
+    const locale = i18n.getLocale(interaction.locale);
     await interaction.reply({
-        content: "エラー (40000)： ボイスチャンネルに接続する必要があります",
+        content: i18n.t("commands.channel.error", locale),
         ephemeral: true
     });
 }
 
 export async function errorLackPeopleReply(interaction: CommandInteraction) {
+    const locale = i18n.getLocale(interaction.locale);
     await interaction.reply({
-        content: "エラー (40001)： 2人以上のユーザーがボイスチャンネルに接続している必要があります",
+        content: i18n.t("commands.teams.errorPeople", locale),
         ephemeral: true
     });
 }

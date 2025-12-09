@@ -14,31 +14,31 @@ import {errorConnectReply, errorReply, successReply} from "../utils/reply";
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("moves")
-        .setDescription("複数人のユーザーを指定してボイスチャンネルを移動します。")
+        .setDescription("Move multiple specified users to a voice channel.")
         .addChannelOption((option: SlashCommandChannelOption) =>
             option
-                .setName("移動先")
-                .setDescription("移動先チャンネルの名称（例. 一般）")
+                .setName("destination")
+                .setDescription("Destination channel name (e.g. General)")
                 .addChannelTypes(2)
                 .setRequired(true)
         ).addUserOption((option: SlashCommandUserOption) =>
-            option.setName("ユーザー1").setDescription("移動するユーザーの名前1").setRequired(true)
+            option.setName("user1").setDescription("User to move 1").setRequired(true)
         ).addUserOption((option: SlashCommandUserOption) =>
-            option.setName("ユーザー2").setDescription("移動するユーザーの名前2")
+            option.setName("user2").setDescription("User to move 2")
         ).addUserOption((option: SlashCommandUserOption) =>
-            option.setName("ユーザー3").setDescription("移動するユーザーの名前3")
+            option.setName("user3").setDescription("User to move 3")
         ).addUserOption((option: SlashCommandUserOption) =>
-            option.setName("ユーザー4").setDescription("移動するユーザーの名前4")
+            option.setName("user4").setDescription("User to move 4")
         ).addUserOption((option: SlashCommandUserOption) =>
-            option.setName("ユーザー5").setDescription("移動するユーザーの名前5")
+            option.setName("user5").setDescription("User to move 5")
         ),
 
     async execute(interaction: CommandInteraction) {
         if (!interaction.isChatInputCommand()) return;
         const options = interaction.options;
-        const channel = options.getChannel("移動先") as VoiceBasedChannel;
+        const channel = options.getChannel("destination") as VoiceBasedChannel;
 
-        const getUser = (n: number) => options.getUser(`ユーザー${n}`) as User | null;
+        const getUser = (n: number) => options.getUser(`user${n}`) as User | null;
         const movedMembers = new Collection<string, GuildMember>();
 
         for (let i = 1; i <= 5; i++) {

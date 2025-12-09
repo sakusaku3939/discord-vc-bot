@@ -1,0 +1,81 @@
+{
+  "commands": {
+    "channel": {
+      "name": "channel",
+      "description": "ボイスチャンネルを指定して、その中にいるメンバー全員を移動します。",
+      "options": {
+        "to": {
+          "name": "移動先",
+          "description": "移動先チャンネルの名称（例. 一般）"
+        },
+        "from": {
+          "name": "移動元",
+          "description": "移動元チャンネルの名称（例. ロビー）"
+        }
+      },
+      "success": "{{from}}から{{to}}へメンバーを移動しました。",
+      "error": "ボイスチャンネルに接続してから実行してください。"
+    },
+    "character": {
+      "name": "character",
+      "description": "スマブラのキャラクターをランダムに選びます",
+      "options": {
+        "team1": {
+          "name": "チーム1のキャラクター数",
+          "description": "チーム1のキャラクター数"
+        },
+        "team2": {
+          "name": "チーム2のキャラクター数",
+          "description": "チーム2のキャラクター数"
+        },
+        "excludeMii": {
+          "name": "miiファイターを除外",
+          "description": "Miiファイター格闘、Miiファイター剣術、Miiファイター射撃をおまかせに含めるか"
+        }
+      },
+      "team1": "チーム1",
+      "team2": "チーム2"
+    },
+    "moves": {
+      "name": "moves",
+      "description": "複数人のユーザーを指定してボイスチャンネルを移動します。",
+      "options": {
+        "channel": {
+          "name": "移動先",
+          "description": "移動先チャンネルの名称（例. 一般）"
+        },
+        "user": {
+          "name": "ユーザー{{number}}",
+          "description": "移動するユーザーの名前{{number}}"
+        }
+      },
+      "success": "{{channel}}へメンバーを移動しました。",
+      "error": "指定されたユーザーがボイスチャンネルに接続していません。"
+    },
+    "teams": {
+      "name": "teams",
+      "description": "チーム分けをしてボイスチャンネルを移動します。",
+      "options": {
+        "team1": {
+          "name": "チーム1",
+          "description": "チーム1の移動先チャンネル（例. 一般）"
+        },
+        "team2": {
+          "name": "チーム2",
+          "description": "チーム2の移動先チャンネル（例. ロビー）"
+        },
+        "exclude": {
+          "name": "除外メンバー",
+          "description": "チーム分けで除外するメンバー"
+        }
+      },
+      "button": "チャンネルを移動する",
+      "errorChannel": "ボイスチャンネルに接続してから実行してください。",
+      "errorPeople": "チーム分けには最低2人必要です。"
+    }
+  },
+  "common": {
+    "error": "エラーが発生しました: {{error}}",
+    "moved": "移動完了しました。"
+  }
+}
