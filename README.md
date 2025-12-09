@@ -1,6 +1,6 @@
 # Discord VCチャンネル移動bot
 
-[For the English version](https://github.com/sakusaku3939/discord-vc-bot/blob/master/README_EN.md)
+[[For the English version]](https://github.com/sakusaku3939/discord-vc-bot/blob/master/README_EN.md)
 
 ![導入サーバー数](https://img.shields.io/badge/dynamic/json?url=https://sakusaku3939.github.io/discord-vc-bot/stats.json&query=message&label=%E5%B0%8E%E5%85%A5%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%95%B0&color=green)
 
