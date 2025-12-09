@@ -1,48 +1,49 @@
-# Discord VC channel moving bot
-[日本語Ver.はこちら](https://github.com/sakusaku3939/discord-vc-bot/blob/master/README_JA.md)
+# Discord VCチャンネル移動bot
 
-![Server Count](https://img.shields.io/badge/dynamic/json?url=https://sakusaku3939.github.io/discord-vc-bot/stats.json&query=message&label=Server%20Count&color=green)
-<br>
+[For the English version](https://github.com/sakusaku3939/discord-vc-bot/blob/master/README_EN.md)
 
-This is a Discord bot that allows you to move voice channels by specifying users.  
-It supports moving multiple users and channels.  
+![導入サーバー数](https://img.shields.io/badge/dynamic/json?url=https://sakusaku3939.github.io/discord-vc-bot/stats.json&query=message&label=%E5%B0%8E%E5%85%A5%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%95%B0&color=green)
 
-[→ Add to Discord](https://discord.com/api/oauth2/authorize?client_id=1044007415680598068&permissions=2164262912&scope=bot%20applications.commands)  
+ユーザーを指定してボイスチャンネルを移動することができるDiscordボットです。  
+複数ユーザーやチャンネルごとの移動にも対応しています。
+
+[→ Discordに追加する](https://discord.com/api/oauth2/authorize?client_id=1044007415680598068&permissions=2164262912&scope=bot%20applications.commands)
 
 ![vc-bot](https://user-images.githubusercontent.com/53967490/204147634-c96a0a1c-a938-457f-afda-93d12533b453.gif)
 
-# Features
+# 機能
 
-- **Voice Channel Management**: Move users between voice channels
-- **Team Assignment**: Randomly divide users into teams
-- **Super Smash Bros. Character Selection**: Randomly select a character from Super Smash Bros. Ultimate
+- **ボイスチャンネル管理**: ユーザーをボイスチャンネル間で移動する
+- **チーム分け**: ユーザーをランダムにチーム分け
+- **スマブラのキャラクター選択**: スマブラSPのキャラクターをランダムに選出する（チームビンゴ用のおまけ機能）
 
-# Usage
+# 使い方
 
-> Move voice channel by specifying user
+> ユーザーを指定してボイスチャンネルを移動
 ```
-/moves (destination channel) (user1) (user2) ・・・
-```
-
-> Specify a voice channel and move all members in it
-```
-/channel (origin channel) (destination channel)
+/moves (移動先チャンネル) (ユーザー1) (ユーザー2) ・・・
 ```
 
-> Divide into teams and move to voice channels
-
+> ボイスチャンネルを指定してその中にいるメンバー全員を移動
 ```
-/teams (team1 channel) (team2 channel) [exclude member]
-```
-
-> Randomly select Smash Bros characters
-
-```
-/character (team1 characters) (team2 characters) [exclude mii fighters]
+/channel (移動元チャンネル) (移動先チャンネル)
 ```
 
-# If you want to customize
-*Requires Node v16.9.0 or later
+> チーム分けをしてボイスチャンネルを移動
+
+```
+/teams (チーム1チャンネル) (チーム2チャンネル) [除外メンバー]
+```
+
+> スマブラのキャラクターをランダムに選択
+
+```
+/character (チーム1のキャラクター数) (チーム2のキャラクター数) [miiファイターを除外]
+```
+
+# カスタマイズする場合
+
+※ Node v16.9.0 以降が必要です。
 
 ```
 git clone https://github.com/sakusaku3939/discord-vc-bot.git
@@ -52,11 +53,13 @@ cd discord-vc-bot
 npm install
 ```
 
-Create a new application from the [Discord Developer Portal](https://discord.com/developers/applications) and paste the token into `DISCORD_TOKEN`.
+[Discord Developer Portal](https://discord.com/developers/applications) から新しいアプリケーションを作成し、トークンを
+`DISCORD_TOKEN` に貼り付けます。
 ```
-echo 'DISCORD_TOKEN="token"' > .env
+echo 'DISCORD_TOKEN="(BOTトークン)"' > .env
 ```
-You can start with the following command.
+
+以下のコマンドで開始できます。
 ```
 ts-node server.ts
 ```
