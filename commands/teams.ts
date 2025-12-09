@@ -1,8 +1,13 @@
 import {
-    SlashCommandBuilder,
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
     CommandInteraction,
-    VoiceBasedChannel,
-    ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, SlashCommandUserOption, User
+    EmbedBuilder,
+    SlashCommandBuilder,
+    SlashCommandUserOption,
+    User,
+    VoiceBasedChannel
 } from "discord.js";
 import {SlashCommandChannelOption} from "@discordjs/builders";
 
@@ -31,7 +36,8 @@ module.exports = {
                 .setDescription("チーム分けで除外するメンバー")
         ),
     async execute(interaction: CommandInteraction) {
-        const options = interaction.options as any;
+        if (!interaction.isChatInputCommand()) return;
+        const options = interaction.options;
         const channel1 = options.getChannel("チーム1") as VoiceBasedChannel;
         const channel2 = options.getChannel("チーム2") as VoiceBasedChannel;
         const excludeMember = options.getUser("除外メンバー");

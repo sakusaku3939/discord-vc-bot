@@ -1,12 +1,12 @@
 import {
-    SlashCommandBuilder,
+    Collection,
     CommandInteraction,
+    DiscordAPIError,
+    GuildMember,
+    SlashCommandBuilder,
     SlashCommandUserOption,
     User,
-    VoiceBasedChannel,
-    DiscordAPIError,
-    Collection,
-    GuildMember
+    VoiceBasedChannel
 } from "discord.js";
 import {SlashCommandChannelOption} from "@discordjs/builders";
 import {errorConnectReply, errorReply, successReply} from "../utils/reply";
@@ -34,7 +34,8 @@ module.exports = {
         ),
 
     async execute(interaction: CommandInteraction) {
-        const options = interaction.options as any;
+        if (!interaction.isChatInputCommand()) return;
+        const options = interaction.options;
         const channel = options.getChannel("移動先") as VoiceBasedChannel;
 
         const getUser = (n: number) => options.getUser(`ユーザー${n}`) as User | null;

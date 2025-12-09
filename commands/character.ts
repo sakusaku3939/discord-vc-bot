@@ -1,7 +1,10 @@
 import {
-    SlashCommandBuilder,
+    ButtonStyle,
     CommandInteraction,
-    ButtonStyle, EmbedBuilder, SlashCommandNumberOption, SlashCommandBooleanOption
+    EmbedBuilder,
+    SlashCommandBooleanOption,
+    SlashCommandBuilder,
+    SlashCommandNumberOption
 } from "discord.js";
 import {shuffle} from "../utils/shuffle";
 
@@ -25,7 +28,8 @@ module.exports = {
                 .setDescription("Miiファイター格闘、Miiファイター剣術、Miiファイター射撃をおまかせに含めるか")
         ),
     async execute(interaction: CommandInteraction) {
-        const options = interaction.options as any;
+        if (!interaction.isChatInputCommand()) return;
+        const options = interaction.options;
         const num1 = options.getNumber("チーム1のキャラクター数");
         const num2 = options.getNumber("チーム2のキャラクター数");
         const mii = options.getBoolean("miiファイターを除外");
