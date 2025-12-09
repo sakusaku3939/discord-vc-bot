@@ -30,6 +30,12 @@ It supports moving multiple users and channels.
 /channel (origin channel) (destination channel)
 ```
 
+> Gather members from all voice channels to a specified channel
+
+```
+/gather [destination channel]
+```
+
 > Divide into teams and move to voice channels
 
 ```
