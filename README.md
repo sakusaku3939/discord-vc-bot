@@ -1,8 +1,7 @@
 # Discord VC channel moving bot
+[日本語Ver.はこちら](https://github.com/sakusaku3939/discord-vc-bot/blob/master/README_JA.md)
 
 ![Server Count](https://img.shields.io/badge/dynamic/json?url=https://sakusaku3939.github.io/discord-vc-bot/stats.json&query=message&label=Server%20Count&color=green)
-
-[日本語Ver.はこちら](https://github.com/sakusaku3939/discord-vc-bot/blob/master/README_JA.md)
 <br>
 
 This is a Discord bot that allows you to move voice channels by specifying users.  
