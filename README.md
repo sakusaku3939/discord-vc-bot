@@ -49,7 +49,7 @@
 
 # カスタマイズする場合
 
-※ Node v16.9.0 以降が必要です。
+※ Node v22.12.0 以降が必要です。
 
 ```
 git clone https://github.com/sakusaku3939/discord-vc-bot.git

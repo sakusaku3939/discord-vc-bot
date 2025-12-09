@@ -50,7 +50,7 @@ It supports moving multiple users and channels.
 
 # If you want to customize
 
-*Requires Node v16.9.0 or later
+*Requires Node v22.12.0 or later
 
 ```
 git clone https://github.com/sakusaku3939/discord-vc-bot.git
