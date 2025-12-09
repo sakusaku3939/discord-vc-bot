@@ -11,6 +11,12 @@ It supports moving multiple users and channels.
 
 ![vc-bot](https://user-images.githubusercontent.com/53967490/204147634-c96a0a1c-a938-457f-afda-93d12533b453.gif)
 
+# Features
+
+- **Voice Channel Management**: Move users between voice channels
+- **Team Assignment**: Randomly divide users into teams
+- **Super Smash Bros. Character Selection**: Randomly select a character from Super Smash Bros. Ultimate
+
 # Usage
 
 > Move voice channel by specifying user
@@ -21,6 +27,18 @@ It supports moving multiple users and channels.
 > Specify a voice channel and move all members in it
 ```
 /channel (origin channel) (destination channel)
+```
+
+> Divide into teams and move to voice channels
+
+```
+/teams (team1 channel) (team2 channel) [exclude member]
+```
+
+> Randomly select Smash Bros characters
+
+```
+/character (team1 characters) (team2 characters) [exclude mii fighters]
 ```
 
 # If you want to customize
