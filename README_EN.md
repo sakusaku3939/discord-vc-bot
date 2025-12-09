@@ -45,7 +45,7 @@ It supports moving multiple users and channels.
 > Randomly select Smash Bros characters
 
 ```
-/character (team1 characters) (team2 characters) [exclude mii fighters]
+/character (team1 characters) (team2 characters) [exclude Mii fighters]
 ```
 
 # If you want to customize
